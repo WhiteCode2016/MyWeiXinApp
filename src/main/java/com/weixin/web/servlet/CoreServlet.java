@@ -1,5 +1,6 @@
 package com.weixin.web.servlet;
 
+import com.weixin.dto.WeiXinInfo;
 import com.weixin.service.CoreService;
 import com.weixin.thread.AccessTokenThread;
 import com.weixin.tool.SignUtil;
@@ -25,11 +26,11 @@ public class CoreServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        log.info("weixin api appId:{}", AccessTokenThread.appId);
-        log.info("weixin api appSecret:{}", AccessTokenThread.appSecret);
+        log.info("weixin api appId:{}", WeiXinInfo.APPID);
+        log.info("weixin api appSecret:{}", WeiXinInfo.APPSECRET);
 
         //未配置appId、appSecret时给出提示
-        if("".equals(AccessTokenThread.appId) || "".equals(AccessTokenThread.appSecret)) {
+        if("".equals(WeiXinInfo.APPID) || "".equals(WeiXinInfo.APPSECRET)) {
             log.error("appId and appSecret configuration error, please check carefully.");
         } else {
             //启动定时获取access_token的线程
@@ -39,7 +40,12 @@ public class CoreServlet extends HttpServlet {
 
     /**
      * 确认请求来自微信服务器
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
      */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("开始校验签名");
         // 微信加密签名
@@ -65,6 +71,10 @@ public class CoreServlet extends HttpServlet {
 
     /**
      * 处理微信服务器发来的消息
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,6 +88,5 @@ public class CoreServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print(respMessage);
         out.close();
-//        System.out.println("Service...");
     }
 }

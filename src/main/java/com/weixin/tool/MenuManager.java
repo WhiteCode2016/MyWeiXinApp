@@ -1,6 +1,7 @@
 package com.weixin.tool;
 
 import com.weixin.dto.AccessToken;
+import com.weixin.dto.WeiXinInfo;
 import com.weixin.dto.menu.BaseButton;
 import com.weixin.dto.menu.MenuButton.CommonButton;
 import com.weixin.dto.menu.MenuButton.ComplexButton;
@@ -23,13 +24,13 @@ public class MenuManager {
 
     //初始化菜单
     private static void initMenu() {
-        // 第三方用户唯一凭证
-        String appId = "wxff19d17ccdebd7bd";
-        // 第三方用户唯一凭证密钥
-        String appSecret = "5604c0976186171cd63a592405ff0833";
+//        // 第三方用户唯一凭证
+//        String appId = "wxff19d17ccdebd7bd";
+//        // 第三方用户唯一凭证密钥
+//        String appSecret = "5604c0976186171cd63a592405ff0833";
 
         // 调用接口获取access_token
-        AccessToken at = WeixinUtil.getAccessToken(appId, appSecret);
+        AccessToken at = WeixinUtil.getAccessToken(WeiXinInfo.APPID, WeiXinInfo.APPSECRET);
 
         if (null != at) {
             // 调用接口创建菜单

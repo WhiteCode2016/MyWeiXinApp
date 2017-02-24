@@ -19,13 +19,15 @@ import java.net.ConnectException;
 import java.net.URL;
 
 /**
- * 公众平台通用接口工具类
+ * 微信公众平台通用接口工具类
  * Created by White on 2017/2/21.
  */
 public class WeixinUtil {
     private static Logger log = LoggerFactory.getLogger(WeixinUtil.class);
+
     // 获取access_token的接口地址（GET） 限200（次/天）
     public final static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+
     // 菜单创建（POST） 限100（次/天）
     public static String menu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 
@@ -110,6 +112,12 @@ public class WeixinUtil {
         return accessToken;
     }
 
+    /**
+     * 创建菜单
+     * @param menu
+     * @param accessToken
+     * @return
+     */
     public static int createMenu(Menu menu, String accessToken) {
         int result = 0;
         String url = menu_create_url.replace("ACCESS_TOKEN", accessToken);
