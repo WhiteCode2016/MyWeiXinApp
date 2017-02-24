@@ -6,10 +6,37 @@ apply plugin: 'war'
 
 sourceCompatibility = 1.5
 
+//远程仓库，下载依赖jar包
 repositories {
-    mavenCentral()
+    maven{
+        //nexus 本地仓库地址，如果仓库已有jar包，则不会下载，没有的话，自动去mavenCentral（）中央仓库下载
+        url 'http://localhost:8081/nexus/repository/maven-central/'
+    }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    //commons-beanutils
+    compile 'commons-beanutils:commons-beanutils:1.7.0'
+    //commons-collections
+    compile 'commons-collections:commons-collections:3.2.1'
+    //commons-lang
+    compile 'commons-lang:commons-lang:2.3'
+    //commons-logging
+    compile 'commons-logging:commons-logging:1.0.4'
+    //ezmorph
+    compile 'net.sf.ezmorph:ezmorph:1.0.6'
+    //morph
+    compile 'net.sf.morph:morph:1.1.1'
+    //slf4j-api
+    compile 'org.slf4j:slf4j-api:1.5.10'
+    //slf4j-log4j12
+    compile 'org.slf4j:slf4j-log4j12:1.5.10'
+    //dom4j
+    compile 'dom4j:dom4j:1.6.1'
+    //xstream
+    compile 'com.thoughtworks.xstream:xstream:1.3.1'
+    //Servlet
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
 }
