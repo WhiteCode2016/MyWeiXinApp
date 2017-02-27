@@ -13,10 +13,6 @@ import org.slf4j.LoggerFactory;
 public class AccessTokenThread implements Runnable{
     private static Logger log = LoggerFactory.getLogger(AccessTokenThread.class);
 
-//    // 第三方用户唯一凭证
-//    public static String appId = "wxff19d17ccdebd7bd";
-//    // 第三方用户唯一凭证密钥
-//    public static String appSecret = "5604c0976186171cd63a592405ff0833";
     public static AccessToken accessToken = null;
 
     @Override

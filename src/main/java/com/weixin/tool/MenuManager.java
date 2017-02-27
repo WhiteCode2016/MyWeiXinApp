@@ -23,11 +23,7 @@ public class MenuManager {
     }
 
     //初始化菜单
-    private static void initMenu() {
-//        // 第三方用户唯一凭证
-//        String appId = "wxff19d17ccdebd7bd";
-//        // 第三方用户唯一凭证密钥
-//        String appSecret = "5604c0976186171cd63a592405ff0833";
+    private static void initMenu() {;
 
         // 调用接口获取access_token
         AccessToken at = WeixinUtil.getAccessToken(WeiXinInfo.APPID, WeiXinInfo.APPSECRET);
@@ -67,13 +63,18 @@ public class MenuManager {
         btn14.setType("click");
         btn14.setKey("14");
 
+        CommonButton btn15 = new CommonButton();
+        btn15.setName("歌曲点播");
+        btn15.setType("click");
+        btn15.setKey("15");
+
         CommonButton btn21 = new CommonButton();
-        btn21.setName("歌曲点播");
+        btn21.setName("单图文");
         btn21.setType("click");
         btn21.setKey("21");
 
         CommonButton btn22 = new CommonButton();
-        btn22.setName("人脸识别");
+        btn22.setName("多图文");
         btn22.setType("click");
         btn22.setKey("22");
 
@@ -92,7 +93,7 @@ public class MenuManager {
         mainBtn1.setSub_button(new BaseButton[] { btn11, btn12, btn13, btn14 });
 
         ComplexButton mainBtn2 = new ComplexButton();
-        mainBtn2.setName("休闲驿站");
+        mainBtn2.setName("基础教程");
         mainBtn2.setSub_button(new BaseButton[] { btn21, btn22 });
 
         ComplexButton mainBtn3 = new ComplexButton();
@@ -117,7 +118,11 @@ public class MenuManager {
         StringBuffer buffer = new StringBuffer();
         buffer.append("谢谢\ue32e小主\ue32e的关注"+EmojiUtil.unifiedEmoji(0x2764)).append("\n");
         buffer.append("[玫瑰]/玫瑰/:rose").append("\n");
-        buffer.append("\ue312\ue312\ue312");
+        buffer.append("\ue312\ue312\ue312").append("\n");
+        buffer.append("例如：").append("\n");
+        buffer.append(" 输入“单图文”").append("\n");
+        buffer.append(" 输入“多图文”").append("\n");
+        buffer.append(" 输入“翻译+中文或英文”").append("\n");
         return buffer.toString();
     }
 }
