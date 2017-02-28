@@ -12,11 +12,9 @@ import com.weixin.dto.message.resp.RespImageMessage;
 import com.weixin.dto.message.resp.RespMusicMessage;
 import com.weixin.dto.message.resp.RespNewsMessage;
 import com.weixin.dto.message.resp.RespTextMessage;
-import com.weixin.enums.MsgTypeEnum;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.Writer;
@@ -155,7 +153,7 @@ public class MessageUtil {
         RespTextMessage respTextMessage = new RespTextMessage();
         respTextMessage.setFromUserName(toUserName);
         respTextMessage.setToUserName(fromUserName);
-        respTextMessage.setMsgType(EnumUtil.toLowerCaseEnum(MsgTypeEnum.TEXT));
+        respTextMessage.setMsgType(MessageUtil.REQ_MESSAGE_TYPE_TEXT);
         respTextMessage.setCreateTime(new Date().getTime());
         respTextMessage.setContent(content);
         return respTextMessageToXml(respTextMessage);
@@ -174,7 +172,7 @@ public class MessageUtil {
         RespImageMessage respImageMessage = new RespImageMessage();
         respImageMessage.setFromUserName(toUserName);
         respImageMessage.setToUserName(fromUserName);
-        respImageMessage.setMsgType(EnumUtil.toLowerCaseEnum(MsgTypeEnum.IMAGE));
+        respImageMessage.setMsgType(MessageUtil.REQ_MESSAGE_TYPE_IMAGE);
         respImageMessage.setCreateTime(new Date().getTime());
         respImageMessage.setImage(image);
         return respImageMessageToXml(respImageMessage);
@@ -191,7 +189,7 @@ public class MessageUtil {
         RespMusicMessage respMusicMessage = new RespMusicMessage();
         respMusicMessage.setFromUserName(toUserName);
         respMusicMessage.setToUserName(fromUserName);
-        respMusicMessage.setMsgType(EnumUtil.toLowerCaseEnum(MsgTypeEnum.MUSIC));
+        respMusicMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_MUSIC);
         respMusicMessage.setCreateTime(new Date().getTime());
         respMusicMessage.setMusic(music);
         return respMusicMessageToXml(respMusicMessage);
@@ -208,7 +206,7 @@ public class MessageUtil {
         RespNewsMessage respNewsMessage = new RespNewsMessage();
         respNewsMessage.setFromUserName(toUserName);
         respNewsMessage.setToUserName(fromUserName);
-        respNewsMessage.setMsgType(EnumUtil.toLowerCaseEnum(MsgTypeEnum.NEWS));
+        respNewsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
         respNewsMessage.setCreateTime(new Date().getTime());
         respNewsMessage.setArticleCount(articles.size());
         for(int i=0;i<articles.size();i++) {
