@@ -1,10 +1,15 @@
 package com.weixin.service;
 
+import com.weixin.dto.AccessToken;
 import com.weixin.dto.BaiDuTranslate.ResultPair;
+import com.weixin.dto.WeiXinInfo;
 import com.weixin.dto.message.Article;
 import com.weixin.tool.MenuManager;
 import com.weixin.tool.MessageUtil;
+import com.weixin.tool.WeixinUtil;
 import com.weixin.tool.baiDuTranslate.BaiDuTranslateUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +81,8 @@ public class CoreService {
                     } else if (eventKey.equals("22")) {
 //                        respMessage = MessageUtil.initText(toUserName, fromUserName, "多图文菜单项被点击!");
                         respMessage = responseManyNewsByClick(respMessage, toUserName, fromUserName);
+                    } else if (eventKey.equals("23")) {
+                        respMessage = MessageUtil.initText(toUserName, fromUserName, responseServiceUrl());
                     } else if (eventKey.equals("31")) {
                         respMessage = MessageUtil.initText(toUserName, fromUserName, "关于我们菜单项被点击!");
                     } else if (eventKey.equals("32")) {
@@ -182,5 +189,21 @@ public class CoreService {
         }
         respMessage = MessageUtil.initText(toUserName, fromUserName, buffer.toString());
         return respMessage;
+    }
+
+    /**
+     * 获取微信服务器地址
+     * @return
+     */
+    private static String responseServiceUrl() {
+        AccessToken at = WeixinUtil.getAccessToken(WeiXinInfo.APPID, WeiXinInfo.APPSECRET);
+        JSONObject jsonObject = WeixinUtil.getServiceUrl(at.getAccessToken());
+        JSONArray jsonArrays = jsonObject.getJSONArray("ip_list");
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("服务器地址如下：").append("\n");
+        for (int i=0;i<jsonArrays.size();i++) {
+            buffer.append(jsonArrays.get(i)).append("\n");
+        }
+        return buffer.toString();
     }
 }

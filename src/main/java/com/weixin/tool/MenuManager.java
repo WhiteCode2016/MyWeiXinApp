@@ -79,6 +79,11 @@ public class MenuManager {
         btn22.setType("click");
         btn22.setKey("22");
 
+        CommonButton btn23 = new CommonButton();
+        btn23.setName("获取IP地址");
+        btn23.setType("click");
+        btn23.setKey("23");
+
         CommonButton btn31 = new CommonButton();
         btn31.setName("关于我们");
         btn31.setType("click");
@@ -95,7 +100,7 @@ public class MenuManager {
 
         ComplexButton mainBtn2 = new ComplexButton();
         mainBtn2.setName("基础教程");
-        mainBtn2.setSub_button(new BaseButton[] { btn21, btn22 });
+        mainBtn2.setSub_button(new BaseButton[] { btn21, btn22, btn23 });
 
         ComplexButton mainBtn3 = new ComplexButton();
         mainBtn3.setName("更多");
