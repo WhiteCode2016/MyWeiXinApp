@@ -1,8 +1,10 @@
 package com.weixin.service;
 
+import com.weixin.dto.BaiDuTranslate.ResultPair;
 import com.weixin.dto.message.Article;
 import com.weixin.tool.MenuManager;
 import com.weixin.tool.MessageUtil;
+import com.weixin.tool.baiDuTranslate.BaiDuTranslateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,7 +105,8 @@ public class CoreService {
             if("".equals(word)) {
                 respMessage = MessageUtil.initText(toUserName, fromUserName, MenuManager.getHelpMenu());
             } else {
-                // TODO Translate
+                // 百度翻译
+               respMessage = responseBaiDuTranslate(respMessage, word, toUserName, fromUserName);
             }
         } else {
             respMessage = MessageUtil.initText(toUserName, fromUserName, "你发送的是文本消息");
@@ -160,6 +163,24 @@ public class CoreService {
         articles.add(article2);
         articles.add(article3);
         respMessage = MessageUtil.initNews(toUserName, fromUserName, articles);
+        return respMessage;
+    }
+
+    /**
+     * 响应百度翻译
+     * @param respMessage
+     * @param word
+     * @param toUserName
+     * @param fromUserName
+     * @return
+     */
+    private static String responseBaiDuTranslate(String respMessage, String word, String toUserName, String fromUserName) {
+        StringBuffer buffer = new StringBuffer();
+        List<ResultPair> resultPairs = BaiDuTranslateUtil.getTranslateResult(word, "auto", "auto").getTrans_result();
+        for(int i=0;i<resultPairs.size();i++) {
+            buffer.append(resultPairs.get(i).getDst()).append("\n");
+        }
+        respMessage = MessageUtil.initText(toUserName, fromUserName, buffer.toString());
         return respMessage;
     }
 }

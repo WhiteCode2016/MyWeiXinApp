@@ -7,6 +7,7 @@ import com.weixin.dto.menu.MenuButton.CommonButton;
 import com.weixin.dto.menu.MenuButton.ComplexButton;
 import com.weixin.dto.menu.MenuButton.Menu;
 import com.weixin.dto.menu.MenuView.ViewButton;
+import com.weixin.tool.common.EmojiUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,13 +117,13 @@ public class MenuManager {
     //订阅成功，显示的菜单
     public static String getHelpMenu() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("谢谢\ue32e小主\ue32e的关注"+EmojiUtil.unifiedEmoji(0x2764)).append("\n");
+        buffer.append("谢谢\ue32e小主\ue32e的关注"+ EmojiUtil.unifiedEmoji(0x2764)).append("\n");
         buffer.append("[玫瑰]/玫瑰/:rose").append("\n");
         buffer.append("\ue312\ue312\ue312").append("\n");
         buffer.append("例如：").append("\n");
-        buffer.append(" 输入“单图文”").append("\n");
-        buffer.append(" 输入“多图文”").append("\n");
         buffer.append(" 输入“翻译+中文或英文”").append("\n");
+        buffer.append(" 点击单图文”").append("\n");
+        buffer.append(" 点击多图文”").append("\n");
         return buffer.toString();
     }
 }

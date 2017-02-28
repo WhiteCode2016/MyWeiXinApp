@@ -1,4 +1,4 @@
-package com.weixin.tool;
+package com.weixin.tool.common;
 
 /**
  * Emoji表情工具类
