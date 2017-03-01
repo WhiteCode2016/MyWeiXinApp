@@ -3,7 +3,10 @@ package com.weixin.service;
 import com.weixin.dto.AccessToken;
 import com.weixin.dto.BaiDuTranslate.ResultPair;
 import com.weixin.dto.WeiXinInfo;
+import com.weixin.dto.cookery.CookeryData;
+import com.weixin.dto.cookery.CookeryResult;
 import com.weixin.dto.message.Article;
+import com.weixin.tool.CookeryUtil;
 import com.weixin.tool.MenuManager;
 import com.weixin.tool.MessageUtil;
 import com.weixin.tool.WeixinUtil;
@@ -14,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +119,14 @@ public class CoreService {
                 // 百度翻译
                respMessage = responseBaiDuTranslate(respMessage, word, toUserName, fromUserName);
             }
+        } else if (content.startsWith("菜谱")) {
+            String food = content.replaceAll("^菜谱", "").trim();
+            if("".equals(food)) {
+                respMessage = MessageUtil.initText(toUserName, fromUserName, MenuManager.getHelpMenu());
+            } else {
+                // 菜谱
+                respMessage = responseCookery(respMessage, food, toUserName, fromUserName);
+            }
         } else {
             respMessage = MessageUtil.initText(toUserName, fromUserName, "你发送的是文本消息");
         }
@@ -205,5 +217,29 @@ public class CoreService {
             buffer.append(jsonArrays.get(i)).append("\n");
         }
         return buffer.toString();
+    }
+
+    /**
+     * 响应聚合菜谱
+     * @param respMessage
+     * @param food
+     * @param toUserName
+     * @param fromUserName
+     * @return
+     */
+    private static String responseCookery(String respMessage, String food, String toUserName, String fromUserName) {
+        CookeryResult cookeryResult = null;
+        try {
+             cookeryResult = CookeryUtil.getCookeryResult(food);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CookeryData data = cookeryResult.getData().get(0);
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(data.getTitle()).append("\n");
+        buffer.append(data.getTags()).append("\n");
+        buffer.append(data.getAlbums().get(0));
+        respMessage = MessageUtil.initText(toUserName, fromUserName, buffer.toString());
+        return respMessage;
     }
 }

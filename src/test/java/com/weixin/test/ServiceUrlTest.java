@@ -7,6 +7,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
+ * 获取服务器地址测试
  * Created by White on 2017/2/28.
  */
 public class ServiceUrlTest {

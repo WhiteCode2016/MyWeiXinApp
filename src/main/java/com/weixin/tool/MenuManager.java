@@ -127,6 +127,7 @@ public class MenuManager {
         buffer.append("\ue312\ue312\ue312").append("\n");
         buffer.append("例如：").append("\n");
         buffer.append(" 输入“翻译+中文或英文”").append("\n");
+        buffer.append(" 输入“菜谱+菜名”").append("\n");
         buffer.append(" 点击单图文”").append("\n");
         buffer.append(" 点击多图文”").append("\n");
         return buffer.toString();

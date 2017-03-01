@@ -20,12 +20,23 @@ public class BaiDuTranslateUtil {
     private final static Logger log = LoggerFactory.getLogger(BaiDuTranslateUtil.class);
 
     //百度翻译接口文档 http://api.fanyi.baidu.com/api/trans/product/apidoc
-    private final static String BAIDU_TRANSLATE_URL = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+    private final static String baiduTranslate_url = "http://api.fanyi.baidu.com/api/trans/vip/translate";
 
     public static TranslateResult getTranslateResult(String query, String from, String to) {
         TranslateResult translateResult = null;
-        Map<String, String> params = buildParams(query, from, to);
-        JSONObject jsonObject =  HttpUtil.httRequestToBaiduTranlate(BAIDU_TRANSLATE_URL, params);
+        //请求参数封装
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("q", query);
+        params.put("from", from);
+        params.put("to", to);
+        params.put("appid", BaiduTranslateInfo.APPID);
+        // 随机数
+        String salt = String.valueOf(System.currentTimeMillis());
+        params.put("salt", salt);
+        // 签名
+        String src = BaiduTranslateInfo.APPID + query + salt + BaiduTranslateInfo.SECURITYKEY; // 加密前的原文
+        params.put("sign", MD5Util.md5(src));
+        JSONObject jsonObject =  HttpUtil.httRequestToBaiduTranlate(baiduTranslate_url, params);
         System.out.println(jsonObject.toString());
         if(jsonObject != null) {
             try {
@@ -43,20 +54,4 @@ public class BaiDuTranslateUtil {
         }
         return translateResult;
     }
-
-    private static Map<String, String> buildParams(String query, String from, String to) {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("q", query);
-        params.put("from", from);
-        params.put("to", to);
-        params.put("appid", BaiduTranslateInfo.APPID);
-        // 随机数
-        String salt = String.valueOf(System.currentTimeMillis());
-        params.put("salt", salt);
-        // 签名
-        String src = BaiduTranslateInfo.APPID + query + salt + BaiduTranslateInfo.SECURITYKEY; // 加密前的原文
-        params.put("sign", MD5Util.md5(src));
-        return params;
-    }
-
 }
