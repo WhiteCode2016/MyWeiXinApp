@@ -1,5 +1,7 @@
 package com.weixin.tool;
 
+import com.weixin.dto.WeiXinInfo;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -9,7 +11,6 @@ import java.util.Arrays;
  * Created by White on 2017/2/20.
  */
 public class SignUtil {
-    private static String token = "SYZZ";
 
     /**
      * 验证签名
@@ -19,7 +20,7 @@ public class SignUtil {
      * @return
      */
     public static boolean checkSignature(String signature, String timestamp, String nonce) {
-        String[] arr = new String[] { token, timestamp, nonce };
+        String[] arr = new String[] {WeiXinInfo.TOKEN, timestamp, nonce };
         // 将token、timestamp、nonce三个参数进行字典序排序
         Arrays.sort(arr);
         StringBuilder content = new StringBuilder();

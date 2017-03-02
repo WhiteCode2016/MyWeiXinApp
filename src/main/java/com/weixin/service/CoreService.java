@@ -2,7 +2,6 @@ package com.weixin.service;
 
 import com.weixin.dto.AccessToken;
 import com.weixin.dto.BaiDuTranslate.ResultPair;
-import com.weixin.dto.WeiXinInfo;
 import com.weixin.dto.cookery.CookeryData;
 import com.weixin.dto.cookery.CookeryResult;
 import com.weixin.dto.message.Article;
@@ -208,8 +207,8 @@ public class CoreService {
      * @return
      */
     private static String responseServiceUrl() {
-        AccessToken at = WeixinUtil.getAccessToken(WeiXinInfo.APPID, WeiXinInfo.APPSECRET);
-        JSONObject jsonObject = WeixinUtil.getServiceUrl(at.getAccessToken());
+        AccessToken at = WeixinUtil.getWXAccessToken();
+        JSONObject jsonObject = WeixinUtil.getServiceUrl(at.getAccess_Token());
         JSONArray jsonArrays = jsonObject.getJSONArray("ip_list");
         StringBuffer buffer = new StringBuffer();
         buffer.append("服务器地址如下：").append("\n");

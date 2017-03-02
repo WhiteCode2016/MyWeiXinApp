@@ -1,7 +1,6 @@
 package com.weixin.thread;
 
 import com.weixin.dto.AccessToken;
-import com.weixin.dto.WeiXinInfo;
 import com.weixin.tool.WeixinUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +18,11 @@ public class AccessTokenThread implements Runnable{
     public void run() {
         while(true) {
             try {
-                accessToken = WeixinUtil.getAccessToken(WeiXinInfo.APPID, WeiXinInfo.APPSECRET);
+                accessToken = WeixinUtil.getWXAccessToken();
                 if(accessToken != null) {
-                    log.info("获取access_token成功，有效时长{}秒 token:{}", accessToken.getExpiresIn(), accessToken.getAccessToken());
+                    log.info("Get access_token Sucess!\nduration:{}s\ntoken:{}", accessToken.getExpires_in(), accessToken.getAccess_Token());
                     //休眠7000秒
-                    Thread.sleep((accessToken.getExpiresIn() - 200) * 1000);
+                    Thread.sleep((accessToken.getExpires_in() - 200) * 1000);
                 } else {
                     //如果access_token为null，60秒后再获取
                     Thread.sleep(60 * 1000);

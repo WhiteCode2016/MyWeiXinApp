@@ -6,23 +6,23 @@ package com.weixin.dto;
  */
 public class AccessToken {
     //获取到的凭证
-    private String accessToken;
+    private String access_Token;
     //凭证有效时间，单位：秒
-    private int expiresIn;
+    private int expires_in;
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getAccess_Token() {
+        return access_Token;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setAccess_Token(String access_Token) {
+        this.access_Token = access_Token;
     }
 
-    public int getExpiresIn() {
-        return expiresIn;
+    public int getExpires_in() {
+        return expires_in;
     }
 
-    public void setExpiresIn(int expiresIn) {
-        this.expiresIn = expiresIn;
+    public void setExpires_in(int expires_in) {
+        this.expires_in = expires_in;
     }
 }

@@ -46,7 +46,7 @@ public class HttpUtil {
         return ssf;
     }
 
-    //微信请求调用
+    // 微信请求调用
     public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr) {
         JSONObject jsonObject = null;
         try {
@@ -95,6 +95,8 @@ public class HttpUtil {
     }
 
     // 百度翻译 聚合菜谱 第三方API请求调用
+    // 百度翻译：http://api.fanyi.baidu.com/api/trans/vip/translate?q=apple&from=en&to=zh&appid=2015063000000001&salt=1435660288&sign=f89f9594663708c1605f3d736d01d2d4
+    // 聚合菜谱：http://apis.juhe.cn/cook/query?key=&menu=%E8%A5%BF%E7%BA%A2%E6%9F%BF&rn=10&pn=3
     public static JSONObject httRequestTo3API(String requestUrl, Map<String, String> params, String method) {
         JSONObject jsonObject = null;
         try {
@@ -156,15 +158,18 @@ public class HttpUtil {
     }
 
     // 将map型转为请求参数型
+    // 例如：a=xxx&b=xxx&...
     public static String urlencode(Map<String,String> data) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry i : data.entrySet()) {
             try {
+                // 将拼接的字符串做UTF-8编码
                 sb.append(i.getKey()).append("=").append(URLEncoder.encode(i.getValue()+"","UTF-8")).append("&");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 

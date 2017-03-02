@@ -9,4 +9,6 @@ public class WeiXinInfo {
     public final static String APPID = "wxff19d17ccdebd7bd";
     //第三方用户唯一凭证密钥
     public final static String APPSECRET = "5604c0976186171cd63a592405ff0833";
+    //TOKEN
+    public final static String TOKEN = "SYZZ";
 }

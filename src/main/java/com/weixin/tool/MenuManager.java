@@ -1,7 +1,6 @@
 package com.weixin.tool;
 
 import com.weixin.dto.AccessToken;
-import com.weixin.dto.WeiXinInfo;
 import com.weixin.dto.menu.BaseButton;
 import com.weixin.dto.menu.MenuButton.CommonButton;
 import com.weixin.dto.menu.MenuButton.ComplexButton;
@@ -27,17 +26,17 @@ public class MenuManager {
     private static void initMenu() {;
 
         // 调用接口获取access_token
-        AccessToken at = WeixinUtil.getAccessToken(WeiXinInfo.APPID, WeiXinInfo.APPSECRET);
+        AccessToken at = WeixinUtil.getWXAccessToken();
 
         if (null != at) {
             // 调用接口创建菜单
-            int result = WeixinUtil.createMenu(getMenu(), at.getAccessToken());
+            int result = WeixinUtil.createMenu(getMenu(), at.getAccess_Token());
 
             // 判断菜单创建结果
             if (0 == result) {
-                log.info("菜单创建成功！");
+                log.info("Create Menu Success！");
             } else {
-                log.info("菜单创建失败，错误码：" + result);
+                log.info("Create Menu Failed，errCode：" + result);
             }
         }
     }
