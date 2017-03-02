@@ -32,7 +32,7 @@ public class CookeryUtil {
         params.put("pn","");//数据返回起始下标
         params.put("rn","");//数据返回条数，最大30
         params.put("albums","");//albums字段类型，1字符串，默认数组
-        JSONObject jsonObject = HttpUtil.httRequestToCookery(cookery_url, params, "GET");
+        JSONObject jsonObject = HttpUtil.httRequestTo3API(cookery_url, params, "GET");
         try {
 
             Map<String, Class> classMap = new HashMap<String, Class>();

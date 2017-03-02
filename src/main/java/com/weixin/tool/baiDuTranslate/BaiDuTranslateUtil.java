@@ -36,8 +36,7 @@ public class BaiDuTranslateUtil {
         // 签名
         String src = BaiduTranslateInfo.APPID + query + salt + BaiduTranslateInfo.SECURITYKEY; // 加密前的原文
         params.put("sign", MD5Util.md5(src));
-        JSONObject jsonObject =  HttpUtil.httRequestToBaiduTranlate(baiduTranslate_url, params);
-        System.out.println(jsonObject.toString());
+        JSONObject jsonObject =  HttpUtil.httRequestTo3API(baiduTranslate_url, params, "GET");
         if(jsonObject != null) {
             try {
                 //解决net.sf.ezmorph.bean.MorphDynaBean异常问题

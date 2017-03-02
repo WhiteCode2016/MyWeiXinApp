@@ -3,6 +3,7 @@ package com.weixin.test;
 import com.weixin.dto.BaiDuTranslate.ResultPair;
 import com.weixin.tool.baiDuTranslate.BaiDuTranslateUtil;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by White on 2017/2/23.
  */
 public class BaiDuTrtanslateTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         StringBuffer buffer = new StringBuffer();
         List<ResultPair> resultPairs = BaiDuTranslateUtil.getTranslateResult(" 今天\naction\n昨天", "auto", "auto").getTrans_result();
